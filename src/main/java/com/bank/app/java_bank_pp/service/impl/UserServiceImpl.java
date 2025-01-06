@@ -43,10 +43,19 @@ public class UserServiceImpl implements UserService {
         .accountNumber(AccountUtils.generateAccountNumber())
         .accountBalance(BigDecimal.ZERO)
         .build();
-        
+
         User savedUser = userRepository.save(newUser);
+
+        AccountInfo accountInfo = AccountInfo.builder()
+        .accountBalance(savedUser.getAccountBalance())
+        .accountNumber(savedUser.getAccountNumber())
+        .accountName(savedUser.getFirstName() + " " + savedUser.getLastName())
+        .build();
+        
         return BankResponse.builder()
         .responseCode(AccountUtils.ACCOUNT_CREATION_SUCCESS_CODE)
+        .responseMessage(AccountUtils.ACCOUNT_CREATION_SUCCESS_MESSAGE)
+        .accountInfo(accountInfo)
         .build();
     }
     
