@@ -15,12 +15,13 @@ import com.bank.app.java_bank_pp.dto.EmailDetails;
  
 public class UserServiceImpl implements UserService {
 
+    //@Autowired kullanmazsak interface'i bu şekilde ekleriz.
     private final EmailService emailService; 
-    
     public UserServiceImpl(EmailService emailService){
         this.emailService = emailService;
     }
 
+    //@Autowired kullanırsak interface'i bu şekilde ekleriz.
     @Autowired
     private UserRepository userRepository;
 
