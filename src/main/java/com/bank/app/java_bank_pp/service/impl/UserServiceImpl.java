@@ -87,12 +87,28 @@ public class UserServiceImpl implements UserService {
         }
 
         User foundUser = userRepository.findByAccountNumber(request.getAccountNumber());
-        return null;
+        
+        AccountInfo accountInfo = AccountInfo.builder()
+            .accountBalance(foundUser.getAccountBalance())
+            .accountNumber(foundUser.getAccountNumber())
+            .accountName(foundUser.getFirstName() + " " + foundUser.getLastName())
+            .build();
+
+        return BankResponse.builder()
+        .responseMessage(AccountUtils.ACCOUNT_FOUND_MESSAGE)
+        .responseCode(AccountUtils.ACCOUNT_FOUND_CODE)
+        .accountInfo(accountInfo)
+        .build();
     }
 
     @Override
     public String nameEnquiry(EnquiryRequest request){
-        return "er";
+        boolean isAccountExist = userRepository.existsByAccountNumber(request.getAccountNumber());
+        if(!isAccountExist){
+            return AccountUtils.ACCOUNT_NOT_EXISTS_MESSAGE;
+        }
+        User foundUser = userRepository.findByAccountNumber(request.getAccountNumber())
+        return foundUser.getFirstName() + " " + foundUser.getLastName();
     }
     
 }
