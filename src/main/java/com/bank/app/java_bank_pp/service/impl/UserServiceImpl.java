@@ -12,6 +12,7 @@ import com.bank.app.java_bank_pp.dto.BankResponse;
 import com.bank.app.java_bank_pp.repository.UserRepository;
 import com.bank.app.java_bank_pp.utils.AccountUtils;
 import com.bank.app.java_bank_pp.dto.EmailDetails;
+import com.bank.app.java_bank_pp.dto.EnquiryRequest;
  
 public class UserServiceImpl implements UserService {
 
@@ -72,6 +73,26 @@ public class UserServiceImpl implements UserService {
         .responseMessage(AccountUtils.ACCOUNT_CREATION_SUCCESS_MESSAGE)
         .accountInfo(accountInfo)
         .build();
+    }
+
+    @Override
+    public BankResponse balanceEnquiry(EnquiryRequest request){
+        boolean isAccountExist = userRepository.existsByAccountNumber(request.getAccountNumber());
+        if(!isAccountExist){
+            return BankResponse.builder()
+            .responseCode(AccountUtils.ACCOUNT_NOT_EXISTS_CODE)
+            .responseMessage(AccountUtils.ACCOUNT_NOT_EXISTS_MESSAGE)
+            .accountInfo(null)
+            .build();
+        }
+
+        User foundUser = userRepository.findByAccountNumber(request.getAccountNumber());
+        return null;
+    }
+
+    @Override
+    public String nameEnquiry(EnquiryRequest request){
+        return "er";
     }
     
 }

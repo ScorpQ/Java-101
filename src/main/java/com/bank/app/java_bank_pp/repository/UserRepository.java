@@ -7,4 +7,6 @@ import com.bank.app.java_bank_pp.entity.User;
 // save(), findById(), findAll(), deleteById(), delete() gibi işlemler yapabiliriz.
 public interface UserRepository extends JpaRepository<User, Long> {
     Boolean existsByEmail(String email);
+    Boolean existsByAccountNumber(String accountNumber);
+    User findByAccountNumber(String accountNumber);
 }

@@ -10,6 +10,12 @@ public class AccountUtils {
     public static final String ACCOUNT_CREATION_SUCCESS_CODE = "002";
     public static final String ACCOUNT_CREATION_SUCCESS_MESSAGE = "Account created successfully";
 
+    public static final String ACCOUNT_NOT_EXISTS_CODE = "003";
+    public static final String ACCOUNT_NOT_EXISTS_MESSAGE = "Account does not exist";
+
+    public static final String ACCOUNT_FOUND_CODE = "004";
+    public static final String ACCOUNT_FOUND_MESSAGE = "Account found";
+
     // Rastgele bir hesap numarası oluşturur.
     public static String generateAccountNumber() {
         Random random = new Random();
